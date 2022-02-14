@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "./Dashboard.scss";
 
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -121,55 +122,61 @@ const Dashboard = (props) => {
       <div className="navbar">
         <div className="title">Firebase Assignment - Blog App</div>
         <div className="buttons">
-          <button onClick={handleSignOut}>Sign out</button>
+          <button className="signoutBtn" onClick={handleSignOut}>
+            Sign out
+          </button>
         </div>
-        <div className="name">-Jayesh Singh</div>
+        <div className="name">Developed by : Jayesh Singh</div>
       </div>
-      This is the dashboard{" "}
-      <pre>
-        {JSON.stringify(props.userData.providerData[0].displayName, null, 4)}
-      </pre>
-      {/* <h4>{props.userData.displayName}</h4>
-      <img src={props.userData.photoURL} alt="avatarImg" /> */}
-      <hr />
+      <div className="profile">
+        <p>Application Dashboard</p>
+        <pre>
+          {JSON.stringify(props.userData.providerData[0].displayName, null, 4)}
+        </pre>
+        {/* <h4>{props.userData.displayName}</h4> */}
+        <img src={props.userData.photoURL} alt="avatarImg" />
+      </div>
       <div className="allBlogs">
-        <h1>All blogs</h1>
-        <button onClick={getBlogs}>Show All Blogs</button>
-        <button onClick={showFilteredData}>Filter my blogs</button>
+        <div className="allBlogTop">
+          <h1>All blogs</h1>
+          <button onClick={getBlogs}>Show All Blogs</button>
+          <button onClick={showFilteredData}>Filter my blogs</button>
+        </div>
         <div className="blogList">
           {allBlogs.map((blog) => (
             <div className="blogBox" key={blog.id}>
               <h4>{blog.title}</h4>
-              <h6>{blog.author}</h6>
-              <p>Posted at : {new Date(blog.datePosted).toString()}</p>
-              <p>{blog.content}</p>
+              <h6>By: {blog.author}</h6>
+              <p className="blogDate">
+                Posted on: {new Date(blog.datePosted).toString()}
+              </p>
+              <p>"{blog.content}"</p>
               <button onClick={() => deleteBlog(blog.id)}>Delete blog</button>
             </div>
           ))}
         </div>
-      </div>
-      <hr />
-      <div className="addBlog">
-        <h1>add a new blog</h1>
-        <form onSubmit={handleAddBlog}>
-          <label htmlFor="title">Blog Title</label>
-          <input
-            type="text"
-            name="title"
-            value={newBlog.title}
-            onChange={handleInputChange}
-          />
+        <div className="addBlog">
+          <h1>Add a new blog</h1>
+          <form onSubmit={handleAddBlog}>
+            <label htmlFor="title">Blog Title</label>
+            <input
+              type="text"
+              name="title"
+              value={newBlog.title}
+              onChange={handleInputChange}
+            />
 
-          <label htmlFor="Content">Blog Content</label>
-          <textarea
-            name="content"
-            value={newBlog.content}
-            onChange={handleInputChange}
-            rows={10}
-            cols={20}
-          />
-          <button type="submit">Add</button>
-        </form>
+            <label htmlFor="Content">Blog Content</label>
+            <textarea
+              name="content"
+              value={newBlog.content}
+              onChange={handleInputChange}
+              rows={10}
+              cols={10}
+            />
+            <button type="submit">Add</button>
+          </form>
+        </div>
       </div>
       <div className="footer">Quantiphi SD - J2J Batch 2022</div>
     </div>

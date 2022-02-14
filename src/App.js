@@ -8,6 +8,9 @@ import { authentication } from "./firebase-config";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
+import { FcGoogle } from "react-icons/fc";
+import { BsGithub } from "react-icons/bs";
+import "./Landing.scss";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -56,15 +59,28 @@ const Landing = ({ userData, setUserData }) => {
       <div className="navbar">
         <div className="title">Firebase Assignment - Blog App</div>
         <div className="buttons">
-          <button onClick={handleSignInWithGoogle}>Google Sign In</button>
-          <button onClick={handleSignInWithGithub}>Github Sign In</button>
+          <button onClick={handleSignInWithGoogle}>
+            <FcGoogle className="icon" />
+            <span>Google</span>
+          </button>
+          <button onClick={handleSignInWithGithub}>
+            <span>
+              <BsGithub className="icon" />
+            </span>
+            <span>GitHub</span>
+          </button>
         </div>
-        <div className="name">-Jayesh Singh</div>
+        <div className="name">Developed by : Jayesh Singh</div>
       </div>
-      div
       {/* <button onClick={handleSignOut}>Sign Out</button> */}
-      <div className="heroDiv">
-        <h1>Here is the landing page for a blog app</h1>
+      <div className="heroContainer">
+        <div className="heroDiv ">
+          <img
+            className="heroImg"
+            src="https://www.ecampusnews.com/files/2016/01/blogs.jpg"
+            alt="blog"
+          ></img>
+        </div>
       </div>
       <div className="footer">Quantiphi SD - J2J Batch 2022</div>
     </div>
