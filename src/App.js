@@ -3,17 +3,10 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
-  signOut,
 } from "firebase/auth";
 import { authentication } from "./firebase-config";
 import { useState } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 
 function App() {
@@ -51,33 +44,29 @@ const Landing = ({ userData, setUserData }) => {
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("signin-token", res.user.accessToken);
+
         setUserData(res.user);
         navigate("/dashboard");
       })
       .catch((err) => console.log(err));
   };
 
-  const handleSignOut = () => {
-    signOut(authentication)
-      .then(() => {
-        window.localStorage.removeItem("signin-token");
-        setUserData({});
-        console.log("Signed out successfully");
-      })
-      .catch((err) => {
-        console.log("Some error occured while signing out :", err);
-      });
-  };
-
   return (
     <div className="App">
-      <button onClick={handleSignInWithGoogle}>Google Sign In</button>
-      <button onClick={handleSignInWithGithub}>Github Sign In</button>
-      <button onClick={handleSignOut}>Sign Out</button>
-
+      <div className="navbar">
+        <div className="title">Firebase Assignment - Blog App</div>
+        <div className="buttons">
+          <button onClick={handleSignInWithGoogle}>Google Sign In</button>
+          <button onClick={handleSignInWithGithub}>Github Sign In</button>
+        </div>
+        <div className="name">-Jayesh Singh</div>
+      </div>
+      div
+      {/* <button onClick={handleSignOut}>Sign Out</button> */}
       <div className="heroDiv">
         <h1>Here is the landing page for a blog app</h1>
       </div>
+      <div className="footer">Quantiphi SD - J2J Batch 2022</div>
     </div>
   );
 };
